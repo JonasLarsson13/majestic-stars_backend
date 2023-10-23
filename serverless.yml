@@ -1,0 +1,30 @@
+service: majestic-stars
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: ${env:AWS_PROFILE}
+  region: eu-north-1
+  iam:
+    role: ${env:LAMBDA_ROLE}
+  deploymentMethod: direct
+
+useDotenv: true
+plugins:
+  - serverless-webpack
+package:
+  individually: true
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.cjs'
+
+functions:
+  register:
+    handler: src/functions/auth/register.handler
+    events:
+      - httpApi: 'POST /api/register'
+  login:
+    handler: src/functions/auth/login.handler
+    events:
+      - httpApi: 'POST /api/login'
