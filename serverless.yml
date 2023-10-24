@@ -4,10 +4,11 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs18.x
-  profile: ${arn:aws:iam::345653343938:user/Main_Henry}
+  accessKeyId: ${env:AWS_ACCESS_KEY}
+  secretAccessKey: ${env:AWS_SECRET_KEY}
   region: eu-north-1
   iam:
-    role: ${arn:aws:iam::345653343938:role/Bonzai_groupexam}
+    role: ${env:LAMBDA_ROLE}
   deploymentMethod: direct
 
 useDotenv: true
@@ -24,7 +25,7 @@ functions:
     handler: src/functions/auth/register.handler
     events:
       - httpApi: 'POST /api/register'
-  login:
-    handler: src/functions/auth/login.handler
-    events:
-      - httpApi: 'POST /api/login'
+  # login:
+  #   handler: src/functions/auth/login.handler
+  #   events:
+  #     - httpApi: 'POST /api/login'

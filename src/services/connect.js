@@ -20,7 +20,7 @@ import mongoose from 'mongoose';
 let conn = null;
 
 
-const uri = "mongodb+srv://Henry:RrKZ3TwxDfgZBoCs@majesticstars.c0ppytg.mongodb.net/majesticstars";
+const uri = process.env.MONGO_URL
 
 async function localTest() {
   if (conn == null) {
