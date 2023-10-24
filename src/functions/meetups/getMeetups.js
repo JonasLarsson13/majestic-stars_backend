@@ -2,17 +2,15 @@ import { sendError, sendResponse } from "../../responses/index.js";
 import { initialize } from "../../services/db.js";
 let client;
 
-exports.handler = async (event) => {
+exports.handler = async () => {
   try {
     const collection = await initialize(client, "meetups");
 
-    const requestData = JSON.parse(event.body);
+    const result = await collection.find({}).toArray();
 
-    const result = await collection.insertOne(requestData);
+    if (!result) return sendError(404, "No meetups found!");
 
-    if (!result.insertedId) return sendError(500, "something went wrong!");
-
-    return sendResponse(200, { success: true });
+    return sendResponse(200, result);
   } catch (error) {
     return sendError(500, "something went wrong!");
   }
