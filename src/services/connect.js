@@ -19,7 +19,7 @@ import mongoose from 'mongoose';
 
 let conn = null;
 
-const uri = "mongodb+srv://heneli627:Qszqszq12345!@majesticstars.c0ppytg.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://heneli627:<password>!@majesticstars.c0ppytg.mongodb.net/?retryWrites=true&w=majority";
 
 async function localTest() {
   if (conn == null) {
