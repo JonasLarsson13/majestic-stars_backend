@@ -4,8 +4,7 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs18.x
-  accessKeyId: ${env:AWS_ACCESS_KEY}
-  secretAccessKey: ${env:AWS_SECRET_KEY}
+  profile: ${env:AWS_PROFILE}
   region: eu-north-1
   iam:
     role: ${env:LAMBDA_ROLE}
