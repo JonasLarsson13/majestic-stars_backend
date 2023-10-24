@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { localTest } from "../../services/connect.js";
 import { mongoose, Schema } from "mongoose";
 import { sendError, sendResponse } from "../../responses/index.js";
@@ -27,29 +27,34 @@ mongoose.model("User", UserSchema, "Users");
 
 const User = mongoose.model("User");
 
-async function registration(req, res) {
-  try {
+async function registration(req) {
+    console.log("did it make it here?");
     const conn = await localTest();
-    const newUser = new User(req.body);
-    newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+  try {
+
+    console.log("what about here?");
+    console.log(req.password)
+    const newUser = new User({
+        email: req.email,
+      });
+    console.log(newUser);
+    newUser.hash_password = bcrypt.hashSync(req.password, 10);
 
     const savedUser = await newUser.save();
+    console.log(savedUser);
     savedUser.hash_password = undefined;
 
-    return res.json(savedUser);
+    return savedUser;
   } catch (err) {
-    return res.status(400).send({
-      message: err.message,
-    });
+    return sendError(500, "something went wrong", err);
   }
 }
 
 export async function handler(event, context) {
   try {
-    // Handle the actual POST request
-    console.log(event);
-    const requestBody = JSON.parse(event);
-    const userReg = await registration(event);
+    const requestBody = JSON.parse(event.body);
+    console.log(requestBody);
+    const userReg = await registration(requestBody);
     console.log(userReg);
     return sendResponse(200, { message: "User registered successfully" });
   } catch (error) {
