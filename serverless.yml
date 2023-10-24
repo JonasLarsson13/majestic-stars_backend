@@ -9,6 +9,8 @@ provider:
   iam:
     role: ${env:LAMBDA_ROLE}
   deploymentMethod: direct
+  environment:
+    MONGO_URL: ${env:MONGO_URL}
 
 useDotenv: true
 plugins:
@@ -28,3 +30,7 @@ functions:
     handler: src/functions/auth/login.handler
     events:
       - httpApi: 'POST /api/login'
+  addMeetup: 
+    handler: src/functions/meetups/addMeetup.handler
+    events:
+      - httpApi: 'POST /api/meetups'
