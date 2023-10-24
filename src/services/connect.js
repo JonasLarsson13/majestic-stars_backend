@@ -19,14 +19,15 @@ import mongoose from 'mongoose';
 
 let conn = null;
 
-const uri = "mongodb+srv://heneli627:<password>!@majesticstars.c0ppytg.mongodb.net/?retryWrites=true&w=majority";
+
+const uri = "mongodb+srv://Henry:RrKZ3TwxDfgZBoCs@majesticstars.c0ppytg.mongodb.net/majesticstars";
 
 async function localTest() {
   if (conn == null) {
-    conn = mongoose.createConnection(uri, {
+    conn = mongoose.connect(uri, {
       serverSelectionTimeoutMS: 5000
     });
-    await conn.asPromise();
+    await conn;
   }
 
   return conn;

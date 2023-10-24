@@ -4,10 +4,10 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs18.x
-  profile: ${env:AWS_PROFILE}
+  profile: ${arn:aws:iam::345653343938:user/Main_Henry}
   region: eu-north-1
   iam:
-    role: ${env:LAMBDA_ROLE}
+    role: ${arn:aws:iam::345653343938:role/Bonzai_groupexam}
   deploymentMethod: direct
 
 useDotenv: true
