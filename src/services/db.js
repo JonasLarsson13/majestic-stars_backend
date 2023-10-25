@@ -1,9 +1,16 @@
-import { MongoClient } from "mongodb";
+import { mongoose } from "mongoose";
 
-export const initialize = async (client, collection) => {
-  client = new MongoClient(process.env.MONGO_URL);
-  await client.connect();
-  const database = client.db("majesticstars");
-  const result = database.collection(collection);
-  return result;
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    });
+    console.log("MongoDB connected successfully");
+  } catch (error) {
+    console.log(`Error: ${error.message}`);
+    process.exit(1);
+  }
 };
+
+export default connectDB;
