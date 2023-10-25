@@ -13,6 +13,13 @@ const MeetupSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    city: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+    },
     location: {
       type: String,
     },
@@ -32,6 +39,14 @@ const MeetupSchema = new mongoose.Schema(
       type: String,
     },
     tags: {
+      type: Array,
+      default: [],
+    },
+    comments: {
+      type: Array,
+      default: [],
+    },
+    ratings: {
       type: Array,
       default: [],
     },
