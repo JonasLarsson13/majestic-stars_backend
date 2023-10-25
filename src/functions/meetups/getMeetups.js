@@ -1,17 +1,31 @@
-/* import { sendError, sendResponse } from "../../responses/index.js";
-import { initialize } from "../../services/db.js";
-let client; */
+// Import Mongoose
+import mongoose from 'mongoose'; 
 
-exports.handler = async () => {
-  /* try {
-    const collection = await initialize(client, "meetups");
+// Import meetup model 
+import Meetup from '../../models/meetupModel.js';
 
-    const result = await collection.find({}).toArray();
+// Import response methods
+import { sendResponse, sendError } from '../../responses/index.js';
 
-    if (!result) return sendError(404, "No meetups found!");
+export const handler = async () => {
 
-    return sendResponse(200, result);
+  try {
+
+    // Connect to MongoDB using mongoose
+    await mongoose.connect(process.env.MONGO_URL);
+    
+    // Query meetups using model
+    const meetups = await Meetup.find({}); 
+
+    if(!meetups) {
+      return sendError(404, "No meetups found"); 
+    }
+
+    return sendResponse(200, meetups);
+
   } catch (error) {
-    return sendError(500, "something went wrong!");
-  } */
-};
+    console.error(error);
+    return sendError(500, "Internal server error", console.error(error));
+  }
+
+}

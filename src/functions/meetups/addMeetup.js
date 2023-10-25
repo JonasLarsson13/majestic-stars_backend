@@ -14,6 +14,6 @@ exports.handler = async (event) => {
 
     return sendResponse(200, { success: true });
   } catch (error) {
-    return sendError(500, "something went wrong!");
+    return sendError(500, "something went wrong!", console.error(error));
   }
 };
