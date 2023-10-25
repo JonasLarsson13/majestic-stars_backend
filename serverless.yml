@@ -38,3 +38,7 @@ functions:
     handler: src/functions/meetups/getMeetups.handler
     events:
       - httpApi: 'GET /api/meetups'
+  searchMeetups:
+    handler: src/functions/meetups/searchMeetups.handler
+    events:
+      - httpApi: 'GET /api/meetups/search'
