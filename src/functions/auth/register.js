@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { localTest } from "../../services/connect.js";
+import connectDB from "../../services/db.js";
 import { mongoose, Schema } from "mongoose";
 import { sendError, sendResponse } from "../../responses/index.js";
 
@@ -28,35 +28,32 @@ mongoose.model("User", UserSchema, "Users");
 const User = mongoose.model("User");
 
 async function registration(req) {
-    console.log("did it make it here?");
-    const conn = await localTest();
   try {
-
-    console.log("what about here?");
-    console.log(req.password)
+    await connectDB();
     const newUser = new User({
         email: req.email,
       });
-    console.log(newUser);
     newUser.hash_password = bcrypt.hashSync(req.password, 10);
 
     const savedUser = await newUser.save();
-    console.log(savedUser);
     savedUser.hash_password = undefined;
 
-    return savedUser;
+    return sendResponse(200, { message: "User registered successfully" });
   } catch (err) {
-    return sendError(500, "something went wrong", err);
+    if (err.code === 11000) {
+      //code 11000 betyder att det är redan registrerat i mongo
+      return sendError(400, "Email is already registered");
+    } else {
+      return sendError(500, "Something went wrong", err);
+    }
   }
 }
 
 export async function handler(event, context) {
   try {
     const requestBody = JSON.parse(event.body);
-    console.log(requestBody);
     const userReg = await registration(requestBody);
-    console.log(userReg);
-    return sendResponse(200, { message: "User registered successfully" });
+    return sendResponse(200, userReg);
   } catch (error) {
     console.error(error);
     return sendError(500, "something went wrong");
