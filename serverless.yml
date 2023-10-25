@@ -42,3 +42,7 @@ functions:
     handler: src/functions/meetups/searchMeetups.handler
     events:
       - httpApi: 'GET /api/meetups/search'
+  addCommentAndRating:
+    handler: src/functions/meetups/addCommentAndRating.handler
+    events:
+      - httpApi: 'POST /api/meetups/{meetupId}/comment'
