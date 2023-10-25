@@ -59,3 +59,4 @@ export async function handler(event, context) {
     return sendError(500, "something went wrong");
   }
 }
+
