@@ -38,7 +38,3 @@ functions:
     handler: src/functions/meetups/getMeetups.handler
     events:
       - httpApi: 'GET /api/meetups'
-  getMeetup:
-    handler: src/functions/meetups/getMeetup.handler
-    events:
-      - httpApi: 'GET /api/meetups/{id}'
