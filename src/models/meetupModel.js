@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
+const CommentSchema = new mongoose.Schema({
+  comment: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const MeetupSchema = new mongoose.Schema(
   {
     title: {
@@ -42,10 +57,7 @@ const MeetupSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    comments: {
-      type: Array,
-      default: [],
-    },
+    comments: [CommentSchema],
     ratings: {
       type: Array,
       default: [],
