@@ -21,7 +21,7 @@ export const handler = async (event) => {
 
     const newComment = {
       comment,
-      username: "Anonymous", // You can set a default or retrieve a username from the user's authentication
+      email: "Anonymous", // You can set a default or retrieve a username from the user's authentication
       timestamp: new Date(),
     };
 
