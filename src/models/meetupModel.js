@@ -42,6 +42,10 @@ const MeetupSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    capacity: {
+      type: Number,
+      default: 0,
+    },
     startDate: {
       type: Date,
       default: Date.now,
@@ -53,7 +57,7 @@ const MeetupSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    tags: {
+    category: {
       type: Array,
       default: [],
     },

@@ -32,7 +32,7 @@ export const handler = async (event, context) => {
     }
 
     if (category) {
-      filters.tags = category;
+      filters.category = category;
     }
 
     console.log("Filter Criteria:", filters);

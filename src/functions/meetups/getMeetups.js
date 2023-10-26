@@ -5,7 +5,9 @@ import connectDB from "../../services/db.js";
 export const handler = async () => {
   try {
     await connectDB();
-    const meetups = await Meetup.find({});
+    const meetups = await Meetup.find({}).select(
+      "_id title description city participants capacity startDate image"
+    );
 
     if (!meetups) {
       return sendError(404, "No meetups found");
