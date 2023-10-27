@@ -6,7 +6,7 @@ export const handler = async () => {
   try {
     await connectDB();
     const meetups = await Meetup.find({}).select(
-      "_id title description city participants capacity startDate image"
+      "_id title description city participants capacity startDate image category"
     );
 
     if (!meetups) {
