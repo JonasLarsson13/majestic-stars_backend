@@ -39,8 +39,7 @@ const MeetupSchema = new mongoose.Schema(
       type: String,
     },
     participants: {
-      type: Number,
-      default: 0,
+      type: Array,
     },
     capacity: {
       type: Number,

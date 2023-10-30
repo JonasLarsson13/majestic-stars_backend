@@ -13,9 +13,6 @@ const UserSchema = new mongoose.Schema(
     hash_password: {
       type: String,
     },
-    events: {
-      type: Array,
-    },
   },
   { autoCreate: true }
 );
