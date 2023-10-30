@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-
 const UserSchema = new mongoose.Schema(
   {
     email: {
@@ -13,6 +12,9 @@ const UserSchema = new mongoose.Schema(
     },
     hash_password: {
       type: String,
+    },
+    events: {
+      type: Array,
     },
   },
   { autoCreate: true }
