@@ -14,6 +14,7 @@ export const handler = async (event) => {
       $or: [
         { title: { $regex: query, $options: "i" } },
         { description: { $regex: query, $options: "i" } },
+        { participants: { $in: query } },
       ],
     });
 

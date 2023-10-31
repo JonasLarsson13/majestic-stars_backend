@@ -26,11 +26,14 @@ functions:
     handler: src/functions/auth/register.handler
     events:
       - httpApi: 'POST /api/register'
-
   login:
     handler: src/functions/auth/login.handler
     events:
       - httpApi: 'POST /api/login'
+  attendDeclineMeetup:
+    handler: src/functions/meetups/attendDeclineMeetup.handler
+    events:
+      - httpApi: 'PUT /api/meetups/{meetupId}'  
   addMeetup: 
     handler: src/functions/meetups/addMeetup.handler
     events:
@@ -39,6 +42,10 @@ functions:
     handler: src/functions/meetups/getMeetups.handler
     events:
       - httpApi: 'GET /api/meetups'
+  getMeetup:
+    handler: src/functions/meetups/getMeetup.handler
+    events:
+      - httpApi: 'GET /api/meetups/{meetupId}'
   searchMeetups:
     handler: src/functions/meetups/searchMeetups.handler
     events:

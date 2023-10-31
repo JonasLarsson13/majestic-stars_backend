@@ -39,6 +39,9 @@ const MeetupSchema = new mongoose.Schema(
       type: String,
     },
     participants: {
+      type: Array,
+    },
+    capacity: {
       type: Number,
       default: 0,
     },
@@ -53,7 +56,7 @@ const MeetupSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    tags: {
+    category: {
       type: Array,
       default: [],
     },

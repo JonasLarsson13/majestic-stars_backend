@@ -1,15 +1,13 @@
+import { middyfy } from "@/services/middify";
 import Meetup from "../../models/meetupModel.js";
-import connectDB from "../../services/db.js";
 import { sendError, sendResponse } from "../../responses/index.js";
+import { checkPermission } from "../../middleware/permission.js";
 
-export const handler = async (event) => {
+const addCommentAndRating = async (event) => {
+  const { comment, rating } = event.body;
   try {
-    await connectDB();
-
     const meetupId = event.pathParameters.meetupId;
 
-    const requestBody = JSON.parse(event.body);
-    const { comment, rating } = requestBody;
     if (!comment) {
       return sendError(400, "Comment is required");
     }
@@ -21,7 +19,7 @@ export const handler = async (event) => {
 
     const newComment = {
       comment,
-      email: "Anonymous", // You can set a default or retrieve a username from the user's authentication
+      email: event.user.email,
       timestamp: new Date(),
     };
 
@@ -39,3 +37,5 @@ export const handler = async (event) => {
     return sendError(500, "Internal server error", error);
   }
 };
+
+export const handler = middyfy(addCommentAndRating).use(checkPermission);

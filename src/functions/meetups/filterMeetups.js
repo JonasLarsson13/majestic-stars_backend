@@ -32,15 +32,13 @@ export const handler = async (event, context) => {
     }
 
     if (category) {
-      filters.tags = category;
+      filters.category = category;
     }
-
-    console.log("Filter Criteria:", filters);
 
     const filteredMeetups = await Meetup.find(filters);
 
     if (filteredMeetups.length === 0) {
-      return sendResponse(404, { message: "No meetups found" });
+      return sendResponse(200, { message: "No meetups found" });
     }
 
     return sendResponse(200, filteredMeetups);
