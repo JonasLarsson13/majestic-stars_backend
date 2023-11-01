@@ -17,7 +17,11 @@ const attendDeclineMeetup = async (event) => {
     if (userIndex !== -1) {
       meetup.participants.splice(userIndex, 1);
     } else {
-      meetup.participants.push(event.user._id.toString());
+      if (meetup.capacity > meetup.participants.length) {
+        meetup.participants.push(event.user._id.toString());
+      } else {
+        return sendResponse(200, { message: "Meetup is full", success: false });
+      }
     }
 
     await meetup.save();
