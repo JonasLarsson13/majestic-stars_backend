@@ -13,6 +13,10 @@ const CommentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  rating: {
+    type: Number,
+    default: 1,
+  },
 });
 
 const MeetupSchema = new mongoose.Schema(

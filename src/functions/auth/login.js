@@ -1,5 +1,3 @@
-
-
 import connectDB from "../../services/db.js";
 import { sendError, sendResponse } from "../../responses/index.js";
 import User from "../../models/users.js";
@@ -12,13 +10,16 @@ async function login(req, res) {
     const user = await User.findOne({ email: req.email });
 
     if (!user || !user.comparePassword(req.password)) {
-      return sendError(401,{ message: 'Invalid username or password.' });
+      return sendResponse(401, { message: "Invalid username or password." });
     }
 
-    const token = Jwt.sign({ email: user.email, _id: user._id }, 'UnsecureSecretJWTkey');
-    return token ;
+    const token = Jwt.sign(
+      { email: user.email, _id: user._id },
+      "UnsecureSecretJWTkey"
+    );
+    return token;
   } catch (err) {
-    return sendError({ message: 'Something went wrong.', error: err });
+    return sendError(500, "Something went wrong.");
   }
 }
 

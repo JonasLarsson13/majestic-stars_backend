@@ -53,7 +53,7 @@ functions:
   addCommentAndRating:
     handler: src/functions/meetups/addCommentAndRating.handler
     events:
-      - httpApi: 'POST /api/meetups/{meetupId}/comment'
+      - httpApi: 'PUT /api/meetups/{meetupId}/comment'
   filterMeetups:
     handler: src/functions/meetups/filterMeetups.handler
     events:
