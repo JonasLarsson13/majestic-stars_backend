@@ -7,7 +7,7 @@ export const handler = async () => {
     await connectDB();
     const meetups = await Meetup.find({})
       .select(
-        "_id title description city participants capacity startDate image category endDate"
+        "_id title description city participants capacity startDate image category endDate host"
       )
       .sort({ endDate: 1 });
 
